@@ -41,6 +41,11 @@ app.post("/assignments", async (req, res) => {
       message: "Server could not create assignment because database connection",
     });
   }
+  if (!results.rows[0]) {
+    return res.status(400).json({
+      message: "Server could not create assignment because there are missing data from client",
+    });
+  }
 
   return res.status(201).json({
     message: "Created assignment sucessfully",
